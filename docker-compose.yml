@@ -1,4 +1,23 @@
+version: '3.3'
 services:
+
+  db:
+    image:  mysql:5.7
+    restart: unless-stopped
+    environment: 
+      MYSQL_DATABASE: phptest
+      MYSQL_USER: honza
+      MYSQL_PASSWORD: honza
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+        - ./database4:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+        - 8080:8080
+        
   web:
     image: nginx:latest
     ports:
